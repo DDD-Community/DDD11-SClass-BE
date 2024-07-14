@@ -10,7 +10,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   const config = new DocumentBuilder()
     .setTitle('알잘딱깔센 앱 API')
-    .setDescription(`ENVIRONMENT=${process.env.NODE_ENV}\n\n  .env=${process.env.ENV}`)
+    .setDescription(`ENVIRONMENT=${process.env.NODE_ENV}`)
     .setVersion(version)
     .build()
   const document = SwaggerModule.createDocument(app, config)

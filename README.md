@@ -21,4 +21,4 @@ npm run docs
 ## Version
 
 - Node.js: v20.12.0
-- TypeScript: 5.4.2
+- TypeScript: v5.4.2

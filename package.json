@@ -1,5 +1,5 @@
 {
-  "name": "hackathon",
+  "name": "onboarding-kit",
   "version": "0.1.0",
   "description": "",
   "author": "",
@@ -20,8 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prepare": "ts-patch install && typia patch",
     "docs": "npx nestia swagger",
-    "docker:build": "docker build -t hackathon-app .",
-    "docker:run": "docker run -d -p 3000:3000 --name hackathon-app hackathon-app"
+    "docker:build": "docker build -t onboarding-kit .",
+    "docker:run": "docker run -d -p 3000:3000 --name onboarding-kit onboarding-kit"
   },
   "dependencies": {
     "@nestia/core": "^3.2.1",

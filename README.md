@@ -9,7 +9,7 @@ npm install
 실행 
 
 ```bash
-npm start 
+npm run start:debug 
 ```
 
 ## Docs

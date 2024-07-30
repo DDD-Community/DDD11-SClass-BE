@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { ConfigModule } from '@nestjs/config'
+import { DbModule } from './db/db.module'
 import * as Joi from 'joi'
 
 @Module({
@@ -13,11 +14,11 @@ import * as Joi from 'joi'
           .default('development'),
       }),
       envFilePath:
-      process.env.NODE_ENV === 'production' ? 
-      '.env.production' :
-      '.env.development',
-      
+        process.env.NODE_ENV === 'production'
+          ? '.env.production'
+          : '.env.development',
     }),
+    DbModule,
   ],
   controllers: [AppController],
   providers: [AppService],

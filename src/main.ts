@@ -15,12 +15,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
   // 문서
-  const config = new DocumentBuilder()
-    .setTitle('알잘딱깔센 앱 API')
-    .setDescription(`ENVIRONMENT=${process.env.NODE_ENV}`)
-    .setVersion(version)
-    .build()
-  const document = SwaggerModule.createDocument(app, config)
+  // const config = new DocumentBuilder()
+  //   .setTitle('알잘딱깔센 앱 API')
+  //   .setDescription(`ENVIRONMENT=${process.env.NODE_ENV}`)
+  //   .setVersion(version)
+  //   .build()
+  // const document = SwaggerModule.createDocument(app, config)
   const swaggerDocument = JSON.parse(
     fs.readFileSync(path.resolve('docs/swagger.json'), 'utf8'),
   )

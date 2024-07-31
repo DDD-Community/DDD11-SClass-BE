@@ -3,6 +3,7 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { ConfigModule } from '@nestjs/config'
 import { DbModule } from './db/db.module'
+import { MyModule } from './my/my.module'
 import * as Joi from 'joi'
 
 @Module({
@@ -19,6 +20,7 @@ import * as Joi from 'joi'
           : '.env.development',
     }),
     DbModule,
+    MyModule,
   ],
   controllers: [AppController],
   providers: [AppService],

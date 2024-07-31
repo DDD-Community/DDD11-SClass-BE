@@ -4,6 +4,7 @@ import { AppModule } from './app.module'
 import { version } from './../package.json'
 import { DbService } from './db/db.service'
 import { strict } from 'assert'
+import { LoggingFilter } from './logging/logging.filter'
 
 async function bootstrap() {
   const swaggerPath = 'docs'
@@ -30,6 +31,7 @@ async function bootstrap() {
     )
     throw e
   })
+  app.useGlobalFilters(new LoggingFilter())
 
   await app.listen(3000)
 }

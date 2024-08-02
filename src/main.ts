@@ -29,18 +29,6 @@ async function bootstrap() {
   // 로깅
   app.useGlobalFilters(new LoggingFilter())
 
-  // DB
-  const id: string = process.env.DB_ID ? process.env.DB_ID : 'admin'
-  const password: string = process.env.DB_PASSWORD
-    ? process.env.DB_PASSWORD
-    : '1234'
-  DbService.connectDB(id, password).catch((e) => {
-    console.log(
-      'You failed to connect MongoDB, your id or password is invalid.',
-    )
-    throw e
-  })
-
   console.log(`${process.env.NODE_ENV} 환경으로 서버가 시작되었습니다.`)
   await app.listen(3000)
 }

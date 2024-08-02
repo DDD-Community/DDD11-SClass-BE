@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
-import { ConfigModule } from '@nestjs/config'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import { DbModule } from './db/db.module'
 import { MyModule } from './my/my.module'
 import * as Joi from 'joi'
+import { MongooseModule } from '@nestjs/mongoose'
 
 @Module({
   imports: [
@@ -21,6 +22,13 @@ import * as Joi from 'joi'
     }),
     DbModule,
     MyModule,
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (config: ConfigService) => ({
+        uri: config.get<string>('DB_URI'),
+      }),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

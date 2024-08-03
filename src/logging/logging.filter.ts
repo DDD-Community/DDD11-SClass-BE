@@ -30,6 +30,11 @@ export class LoggingFilter<T> implements ExceptionFilter {
           : 'Internal server error',
     }
 
+    var errStack: any = null
+    if (exception instanceof Error) {
+      errStack = exception.stack
+    }
+
     // 요청 및 응답 로깅
     console.error({
       request: {
@@ -39,6 +44,7 @@ export class LoggingFilter<T> implements ExceptionFilter {
         url: request.url,
       },
       response: responseBody,
+      stack: errStack, 
     })
 
     response.status(status).json(responseBody)

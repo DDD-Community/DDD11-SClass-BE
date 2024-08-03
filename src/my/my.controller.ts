@@ -7,10 +7,9 @@ import {
   Param,
   Delete,
 } from '@nestjs/common'
-import { TypedRoute } from '@nestia/core'
+import { TypedBody, TypedRoute } from '@nestia/core'
 import { MyService } from './my.service'
 import { CreateMyDto } from './dto/create-my.dto'
-import { UpdateMyDto } from './dto/update-my.dto'
 
 @Controller('my')
 export class MyController {
@@ -20,11 +19,10 @@ export class MyController {
    * sample description
    * @returns sample return
    * @tag MY 유저정보
-   * @summary 온보딩
    */
   @TypedRoute.Post()
-  create(@Body() createMyDto: CreateMyDto) {
-    return this.myService.create(createMyDto)
+  create(@TypedBody() req: CreateMyDto.Request) {
+    return this.myService.create(req)
   }
 
   /**
@@ -32,15 +30,20 @@ export class MyController {
    * @tag MY 유저정보
    * @summary 마이페이지 조회
    */
-  @TypedRoute.Get()
-  findAll() {
-    return this.myService.findAll()
-  }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.myService.findOne(+id);
+  // @TypedRoute.Get()
+  // findAll() {
+  //   return this.myService.findAll()
   // }
+
+  /**
+   * sample description
+   * @tag MY 유저정보
+   * @summary 마이페이지 조회
+   */
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.myService.findOne(id)
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateMyDto: UpdateMyDto) {

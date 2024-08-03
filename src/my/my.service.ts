@@ -1,22 +1,38 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { CreateMyDto } from './dto/create-my.dto'
-import { UpdateMyDto } from './dto/update-my.dto'
+// import { UpdateMyDto } from './dto/update-my.dto'
+import { InjectModel } from '@nestjs/mongoose'
+import { Cat } from 'src/schemas/my.schema'
+import { Model } from 'mongoose'
+import { UnsubscriptionError } from 'rxjs'
 
 @Injectable()
 export class MyService {
-  create(createMyDto: CreateMyDto) {
-    return 'This action adds a new my'
+  constructor(@InjectModel(Cat.name) private catModel: Model<Cat>) {}
+
+  async create(req: CreateMyDto.Request): Promise<Cat> {
+    const createdCat = new this.catModel({
+      _id: req.id,
+      name: req.name,
+    })
+    return await createdCat.save()
   }
 
   findAll() {
-    return `This action returns all my`
+    const cat = this.catModel.find().exec()
+
+    return cat
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} my`
+  async findOne(id: string) {
+    const user = await this.catModel.findById(id)
+    if (!user) {
+      throw new NotFoundException()
+    }
+    return user.toJSON()
   }
 
-  update(id: number, updateMyDto: UpdateMyDto) {
+  update(id: number) {
     return `This action updates a #${id} my`
   }
 

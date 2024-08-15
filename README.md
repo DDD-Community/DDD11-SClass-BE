@@ -9,7 +9,7 @@ npm install
 실행 
 
 ```bash
-npm start 
+npm run start:debug 
 ```
 
 ## Docs
@@ -20,4 +20,5 @@ npm run docs
 
 ## Version
 
-- TypeScript: 5.4.2
+- Node.js: v20.12.0
+- TypeScript: v5.4.2

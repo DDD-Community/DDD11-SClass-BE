@@ -46,6 +46,16 @@ export const NESTIA_CONFIG: INestiaConfig = {
      * `swagger.json` file would be renamed to it.
      */
     output: "docs",
+    servers: [
+      {
+        url: "http://localhost:3000",
+        description: "Local Server",
+      },
+      {
+        url: "https://s-class.koyeb.app",
+        description: "Production Server",
+      },
+    ],
   },
 
   /**

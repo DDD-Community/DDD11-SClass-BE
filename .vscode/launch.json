@@ -12,9 +12,6 @@
       "program": "${workspaceFolder}/src/main.ts",
       "preLaunchTask": "tsc: watch - tsconfig.json",
       "outFiles": ["${workspaceFolder}/dist/**/*.js"],
-      "env": {
-        "NODE_ENV": "production"
-      }
     }
   ]
 }

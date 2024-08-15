@@ -47,10 +47,10 @@ export const NESTIA_CONFIG: INestiaConfig = {
      */
     output: "docs",
     servers: [
-      // {
-      //   url: "http://localhost:3000",
-      //   description: "Local Server",
-      // },
+      {
+        url: "http://localhost:3000",
+        description: "Local Server",
+      },
       {
         url: "https://s-class.koyeb.app",
         description: "Production Server",

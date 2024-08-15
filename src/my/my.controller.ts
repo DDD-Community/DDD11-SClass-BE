@@ -20,10 +20,10 @@ export class MyController {
    * @returns sample return
    * @tag MY 유저정보
    */
-  @TypedRoute.Post()
-  create(@TypedBody() req: CreateMyDto.Request) {
-    return this.myService.create(req)
-  }
+  // @TypedRoute.Post()
+  // create(@TypedBody() req: CreateMyDto.Request) {
+  //   return this.myService.create(req)
+  // }
 
   /**
    * sample description
@@ -40,10 +40,10 @@ export class MyController {
    * @tag MY 유저정보
    * @summary 마이페이지 조회
    */
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.myService.findOne(id)
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.myService.findOne(id)
+  // }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateMyDto: UpdateMyDto) {

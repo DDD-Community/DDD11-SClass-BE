@@ -44,7 +44,7 @@ export class LoggingFilter<T> implements ExceptionFilter {
         url: request.url,
       },
       response: responseBody,
-      stack: errStack, 
+      stack: errStack,
     })
 
     response.status(status).json(responseBody)

@@ -1,20 +1,20 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
 import mongoose, { HydratedDocument, Types } from 'mongoose'
 
-export type CatDocument = HydratedDocument<Cat>
+export type UserDocument = HydratedDocument<User>
 
 @Schema()
-export class Cat {
+export class User {
   @Prop({ type: Types.ObjectId })
   _id: string
   @Prop()
   name: string
 }
 
-export const CatSchema = SchemaFactory.createForClass(Cat)
+export const UserSchema = SchemaFactory.createForClass(User)
 
 // id -> _id
-CatSchema.pre('save', function (next) {
+UserSchema.pre('save', function (next) {
   if (this.id) {
     this._id = this.id
     delete this.id
@@ -23,7 +23,7 @@ CatSchema.pre('save', function (next) {
 })
 
 // _id -> id
-CatSchema.set('toJSON', {
+UserSchema.set('toJSON', {
   transform: (doc, ret) => {
     ret.id = ret._id.toString()
     delete ret._id
@@ -32,7 +32,7 @@ CatSchema.set('toJSON', {
   },
 })
 
-// CatSchema.set('toObject', {
+// UserSchema.set('toObject', {
 //   transform: (doc, ret) => {
 //     ret._id2 = ret.id
 //     delete ret.id
@@ -40,7 +40,7 @@ CatSchema.set('toJSON', {
 //   },
 // })
 
-// CatSchema.set('toJSON', {
+// UserSchema.set('toJSON', {
 //   transform: (doc, ret) => {
 //     ret._id3 = ret.id
 //     delete ret.id

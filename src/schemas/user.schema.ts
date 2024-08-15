@@ -8,19 +8,23 @@ export class User {
   @Prop({ type: Types.ObjectId })
   _id: string
   @Prop()
-  name: string
+  nickname: string
+  @Prop()
+  job: 'designer' | 'devloper' | 'project_manager'
+  @Prop()
+  workExperience: number
 }
 
 export const UserSchema = SchemaFactory.createForClass(User)
 
 // id -> _id
-UserSchema.pre('save', function (next) {
-  if (this.id) {
-    this._id = this.id
-    delete this.id
-  }
-  next()
-})
+// UserSchema.pre('save', function (next) {
+//   if (this.id) {
+//     this._id = this.id
+//     delete this.id
+//   }
+//   next()
+// })
 
 // _id -> id
 UserSchema.set('toJSON', {

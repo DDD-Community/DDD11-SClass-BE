@@ -5,12 +5,12 @@ export namespace ReadHomeDto {
   export interface Res {
     articles: {
       id: string
-      category: string 
+      category: string
+      postDate: Date 
+      source: string 
       title: string
-      from: string 
-      date: string 
-      thumnail: string 
-      url: string 
+      thumbnail: string
+      url: string
     }[]
   }
 }

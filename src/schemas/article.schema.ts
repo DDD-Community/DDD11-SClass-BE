@@ -7,17 +7,18 @@ export type ArticleDocument = HydratedDocument<Article>
 export class Article {
   @Prop({ type: Types.ObjectId })
   _id: string
+
   id: string
   @Prop()
   category: string
   @Prop()
+  postDate: Date 
+  @Prop()
+  source: string 
+  @Prop()
   title: string
   @Prop()
-  from: string 
-  @Prop()
-  date: string 
-  @Prop()
-  thumnail: string
+  thumbnail: string
   @Prop()
   url: string
 }

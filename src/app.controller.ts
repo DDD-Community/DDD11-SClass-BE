@@ -8,7 +8,7 @@ export class AppController {
   constructor(private readonly articleService: ArticleService) {}
 
   /**
-   * sample description
+   * url 로 썸네일 추출하는 법 아시나요... 아시는분.. 가르쳐주세요 
    * @summary 홈
    * @returns sample return
    * @tag Home 홈

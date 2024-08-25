@@ -3,10 +3,13 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { DbModule } from './db/db.module'
-// import { MyModule } from './my/my.module'
 import * as Joi from 'joi'
 import { MongooseModule } from '@nestjs/mongoose'
 import { UserModule } from './user/user.module'
+import { ArticleModule } from './article/article.module';
+import { HomeModule } from './home/home.module';
+import { ArticleService } from './article/article.service'
+import { Article } from './schemas/article.schema'
 
 @Module({
   imports: [
@@ -22,7 +25,6 @@ import { UserModule } from './user/user.module'
           : '.env.development',
     }),
     DbModule,
-    // MyModule,
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -31,6 +33,8 @@ import { UserModule } from './user/user.module'
       }),
     }),
     UserModule,
+    ArticleModule,
+    HomeModule,
   ],
   controllers: [AppController],
   providers: [AppService],

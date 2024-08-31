@@ -10,8 +10,8 @@ import {
 } from '@nestjs/common'
 import { TypedBody, TypedRoute } from '@nestia/core'
 import { CreateMyDto } from './dto/create-my.dto'
-import { ReadUserDto } from 'src/user/dto/read-user.dto'
-import { UserService } from 'src/user/user.service'
+import { ReadUserDto } from '../user/dto/read-user.dto'
+import { UserService } from '../user/user.service'
 
 @Controller('my')
 export class MyController {

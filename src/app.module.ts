@@ -10,6 +10,8 @@ import { ArticleModule } from './article/article.module';
 import { HomeModule } from './home/home.module';
 import { ArticleService } from './article/article.service'
 import { Article } from './schemas/article.schema'
+import { OnboardingModule } from './onboarding/onboarding.module';
+import { MyModule } from './my/my.module'
 
 @Module({
   imports: [
@@ -35,6 +37,8 @@ import { Article } from './schemas/article.schema'
     UserModule,
     ArticleModule,
     HomeModule,
+    OnboardingModule,
+    MyModule,
   ],
   controllers: [AppController],
   providers: [AppService],

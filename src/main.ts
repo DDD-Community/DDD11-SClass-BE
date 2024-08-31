@@ -13,6 +13,7 @@ async function bootstrap() {
   const swaggerPath = 'docs'
 
   const app = await NestFactory.create(AppModule)
+  app.setGlobalPrefix('v1')
 
   // 문서
   // const config = new DocumentBuilder()

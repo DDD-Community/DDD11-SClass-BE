@@ -1,4 +1,8 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common'
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common'
 import { CreateUserDto } from './dto/create-user.dto'
 import { InjectModel } from '@nestjs/mongoose'
 import { User } from '../schemas/user.schema'
@@ -27,7 +31,7 @@ export class UserService {
     return `This action returns all user`
   }
 
-  async findOne(id: string):Promise<ReadUserDto.Res> {
+  async findOne(id: string): Promise<ReadUserDto.Res> {
     const user = await this.userModel.findById(id)
     if (!user) {
       throw new NotFoundException()

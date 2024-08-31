@@ -4,6 +4,4 @@ import { ArticleService } from './article/article.service'
 import { ReadHomeDto } from './home/dto/read-home.dto'
 
 @Controller()
-export class AppController {
-
-}
+export class AppController {}

@@ -26,4 +26,3 @@ UserSchema.set('toJSON', {
     return ret
   },
 })
-

@@ -12,9 +12,9 @@ export class Article {
   @Prop()
   category: string
   @Prop()
-  postDate: Date 
+  postDate: Date
   @Prop()
-  source: string 
+  source: string
   @Prop()
   title: string
   @Prop()

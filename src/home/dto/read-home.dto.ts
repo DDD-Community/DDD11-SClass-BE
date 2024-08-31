@@ -6,8 +6,8 @@ export namespace ReadHomeDto {
     articles: {
       id: string
       category: string
-      postDate: Date 
-      source: string 
+      postDate: Date
+      source: string
       title: string
       thumbnail: string
       url: string

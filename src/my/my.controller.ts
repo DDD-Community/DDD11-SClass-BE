@@ -24,7 +24,7 @@ export class MyController {
    * @tag My 마이페이지
    */
   @Get()
-  async findOne(@Query('id') id: string): Promise<ReadUserDto.Res> {
-    return await this.userService.findOne(id)
+  async findOne(@Query('userId') userId: string): Promise<ReadUserDto.Res> {
+    return await this.userService.findOne(userId)
   }
 }

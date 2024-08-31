@@ -14,12 +14,12 @@ export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async create(req: CreateUserDto.Req) {
-    const exist = await this.userModel.findById(req.id)
+    const exist = await this.userModel.findById(req.userId)
     if (exist) {
       throw new ConflictException('이미 존재하는 id 입니다.')
     }
     const user = new this.userModel({
-      _id: req.id,
+      _id: req.userId,
       nickname: req.nickname,
       job: req.job,
       workExperience: req.workExperience,
@@ -31,11 +31,11 @@ export class UserService {
     return `This action returns all user`
   }
 
-  async findOne(id: string): Promise<ReadUserDto.Res> {
-    const user = await this.userModel.findById(id)
+  async findOne(userId: string): Promise<ReadUserDto.Res> {
+    const user = await this.userModel.findById<ReadUserDto.Res>(userId)
     if (!user) {
       throw new NotFoundException()
     }
-    return user.toJSON()
+    return user
   }
 }

@@ -1,7 +1,7 @@
-import { INestiaConfig } from "@nestia/sdk";
-import { Module } from "@nestjs/common";
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "src/app.module";
+import { INestiaConfig } from '@nestia/sdk'
+import { Module } from '@nestjs/common'
+import { NestFactory } from '@nestjs/core'
+import { AppModule } from 'src/app.module'
 
 // import { FastifyAdaptor } from "@nestjs/platform-fastify";
 
@@ -22,14 +22,14 @@ export const NESTIA_CONFIG: INestiaConfig = {
       controllers: [],
     })
     class MyModule {}
-    const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create(AppModule)
     // const app = await NestFactory.create(YourModule, new FastifyAdaptor());
-    // app.setGlobalPrefix("api");
+    app.setGlobalPrefix('v1')
     // app.enableVersioning({
     //     type: VersioningType.URI,
     //     prefix: "v",
     // })
-    return app;
+    return app
   },
 
   /**
@@ -45,15 +45,15 @@ export const NESTIA_CONFIG: INestiaConfig = {
      * Otherwise you've configured the full path with file name and extension, the
      * `swagger.json` file would be renamed to it.
      */
-    output: "docs",
+    output: 'docs',
     servers: [
       // {
       //   url: "http://localhost:3000",
       //   description: "Local Server",
       // },
       {
-        url: "https://s-class.koyeb.app",
-        description: "Production Server",
+        url: 'https://s-class.koyeb.app',
+        description: 'Production Server',
       },
     ],
   },
@@ -63,7 +63,7 @@ export const NESTIA_CONFIG: INestiaConfig = {
    *
    * If not configured, you can't build the SDK library.
    */
-  output: "src/api",
+  output: 'src/api',
 
   /**
    * Target directory that SDK distribution files would be placed in.
@@ -104,5 +104,5 @@ export const NESTIA_CONFIG: INestiaConfig = {
    * @default false
    */
   // simulate: true,
-};
-export default NESTIA_CONFIG;
+}
+export default NESTIA_CONFIG

@@ -3,7 +3,7 @@ export namespace CreateUserDto {
   export interface Req {
     id: string
     nickname: string
-    job: 'designer' | 'developer' | 'project_manager'
+    job: 'designer' | 'developer' | 'planner'
     workExperience: number
   }
 }

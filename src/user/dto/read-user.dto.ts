@@ -3,7 +3,7 @@ export namespace ReadUserDto {
   export interface Res {
     id: string
     nickname: string
-    job: 'designer' | 'devloper' | 'project_manager'
+    job: 'designer' | 'devloper' | 'planner'
     workExperience: number
   }
 }

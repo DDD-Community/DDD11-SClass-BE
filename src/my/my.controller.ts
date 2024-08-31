@@ -6,52 +6,25 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common'
 import { TypedBody, TypedRoute } from '@nestia/core'
-import { MyService } from './my.service'
 import { CreateMyDto } from './dto/create-my.dto'
+import { ReadUserDto } from 'src/user/dto/read-user.dto'
+import { UserService } from 'src/user/user.service'
 
 @Controller('my')
 export class MyController {
-  constructor(private readonly myService: MyService) {}
+  constructor(private readonly userService: UserService) {}
 
   /**
    * sample description
+   * @summary 마이페이지
    * @returns sample return
-   * @tag MY 유저정보
+   * @tag My 마이페이지
    */
-  // @TypedRoute.Post()
-  // create(@TypedBody() req: CreateMyDto.Request) {
-  //   return this.myService.create(req)
-  // }
-
-  /**
-   * sample description
-   * @tag MY 유저정보
-   * @summary 마이페이지 조회
-   */
-  // @TypedRoute.Get()
-  // findAll() {
-  //   return this.myService.findAll()
-  // }
-
-  /**
-   * sample description
-   * @tag MY 유저정보
-   * @summary 마이페이지 조회
-   */
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.myService.findOne(id)
-  // }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateMyDto: UpdateMyDto) {
-  //   return this.myService.update(+id, updateMyDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.myService.remove(+id);
-  // }
+  @Get()
+  async findOne(@Query('id') id: string): Promise<ReadUserDto.Res> {
+    return await this.userService.findOne(id)
+  }
 }

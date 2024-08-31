@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common'
 import { HomeService } from './home.service'
-import { ArticleService } from 'src/article/article.service'
+import { ArticleService } from '../article/article.service'
 import { ReadHomeDto } from './dto/read-home.dto'
 
 @Controller('home')

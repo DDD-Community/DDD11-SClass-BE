@@ -20,7 +20,7 @@ export const UserSchema = SchemaFactory.createForClass(User)
 // _id -> id
 UserSchema.set('toJSON', {
   transform: (doc, ret) => {
-    ret.id = ret._id.toString()
+    ret.userId = ret._id.toString()
     delete ret._id
     delete ret.__v
     return ret

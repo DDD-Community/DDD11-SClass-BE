@@ -8,7 +8,7 @@ export class Article {
   @Prop({ type: Types.ObjectId })
   _id: string
 
-  id: string
+  articleId: string
   @Prop()
   category: string
   @Prop()
@@ -28,8 +28,8 @@ export const ArticleSchema = SchemaFactory.createForClass(Article)
 // _id -> id
 ArticleSchema.set('toJSON', {
   transform: (doc, ret) => {
-    ret.id = ret._id.toString()
-    doc.id = ret._id.toString()
+    ret.articleId = ret._id.toString()
+    // doc.articleId = ret._id.toString()
     delete ret._id
     delete ret.__v
     return ret

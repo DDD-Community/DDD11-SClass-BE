@@ -5,10 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
 import { DbModule } from './db/db.module'
 import * as Joi from 'joi'
 import { MongooseModule } from '@nestjs/mongoose'
-import { UserModule } from './user/user.module'
-import { ArticleModule } from './article/article.module'
 import { HomeModule } from './home/home.module'
-import { ArticleService } from './article/article.service'
 import { Article } from './schemas/article.schema'
 import { OnboardingModule } from './onboarding/onboarding.module'
 import { MyModule } from './my/my.module'
@@ -34,8 +31,6 @@ import { MyModule } from './my/my.module'
         uri: config.get<string>('DB_URI'),
       }),
     }),
-    UserModule,
-    ArticleModule,
     HomeModule,
     OnboardingModule,
     MyModule,

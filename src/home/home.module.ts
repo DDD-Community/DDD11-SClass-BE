@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common'
 import { HomeService } from './home.service'
 import { HomeController } from './home.controller'
-import { ArticleModule } from '../article/article.module'
+import { DbModule } from 'src/db/db.module'
+import { Article, ArticleSchema } from 'src/schemas/article.schema'
 
 @Module({
-  imports: [ArticleModule],
+  imports: [DbModule],
   controllers: [HomeController],
   providers: [HomeService],
 })

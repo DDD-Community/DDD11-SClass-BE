@@ -1,4 +1,4 @@
-export namespace ReadUserDto {
+export namespace ReadMyDto {
   res: Response
   export interface Res {
     userId: string

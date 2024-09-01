@@ -5,7 +5,9 @@ import { CreateCheckboxDto } from './dto/create-checkbox.dto';
 import { UpdateCompletedDto } from './dto/update-completed.dto';
 import { UpdateOrderNoDto } from './dto/update-orderNo.dto';
 import { UpdateIsMainDto } from './dto/update-isMain.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Checklist')
 @Controller('checklists')
 export class ChecklistController {
   constructor(private readonly checklistService: ChecklistService) {}

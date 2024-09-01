@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common'
 import { OnboardingController } from './onboarding.controller'
-import { UserModule } from '../user/user.module'
+import { DbModule } from 'src/db/db.module'
+import { OnboardingService } from './onboarding.service'
 
 @Module({
-  imports: [UserModule],
+  imports: [DbModule],
   controllers: [OnboardingController],
+  providers: [OnboardingService],
 })
 export class OnboardingModule {}

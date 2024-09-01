@@ -8,12 +8,12 @@ import {
   Delete,
 } from '@nestjs/common'
 import { TypedBody } from '@nestia/core'
-import { CreateUserDto } from '../user/dto/create-user.dto'
-import { UserService } from '../user/user.service'
+import { CreateOnboardingDto } from './dto/create-onboarding.dto'
+import { OnboardingService } from './onboarding.service'
 
 @Controller('onboarding')
 export class OnboardingController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly onboardingService: OnboardingService) {}
 
   /**
    * job 은 'designer' | 'developer' | 'planner' 중 하나
@@ -22,7 +22,7 @@ export class OnboardingController {
    * @tag Onboarding 온보딩 & 회원가입
    */
   @Post()
-  async create(@TypedBody() req: CreateUserDto.Req) {
-    await this.userService.create(req)
+  async create(@TypedBody() req: CreateOnboardingDto.Req) {
+    await this.onboardingService.create(req)
   }
 }

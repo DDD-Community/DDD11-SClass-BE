@@ -3,17 +3,16 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common'
-import { CreateUserDto } from './dto/create-user.dto'
+import { CreateOnboardingDto } from './dto/create-onboarding.dto'
 import { InjectModel } from '@nestjs/mongoose'
 import { User } from '../schemas/user.schema'
 import { Model } from 'mongoose'
-import { ReadUserDto } from './dto/read-user.dto'
 
 @Injectable()
-export class UserService {
+export class OnboardingService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-  async create(req: CreateUserDto.Req) {
+  async create(req: CreateOnboardingDto.Req) {
     const exist = await this.userModel.findById(req.userId)
     if (exist) {
       throw new ConflictException('이미 존재하는 id 입니다.')
@@ -25,17 +24,5 @@ export class UserService {
       workExperience: req.workExperience,
     })
     return await user.save()
-  }
-
-  findAll() {
-    return `This action returns all user`
-  }
-
-  async findOne(userId: string): Promise<ReadUserDto.Res> {
-    const user = await this.userModel.findById<ReadUserDto.Res>(userId)
-    if (!user) {
-      throw new NotFoundException()
-    }
-    return user
   }
 }

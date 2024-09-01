@@ -1,11 +1,10 @@
 import { Controller, Get } from '@nestjs/common'
 import { HomeService } from './home.service'
-import { ArticleService } from '../article/article.service'
 import { ReadHomeDto } from './dto/read-home.dto'
 
 @Controller('home')
 export class HomeController {
-  constructor(private readonly articleService: ArticleService) {}
+  constructor(private readonly homeService: HomeService) {}
 
   /**
    * sample description
@@ -15,7 +14,7 @@ export class HomeController {
    */
   @Get('articles')
   async getHome(): Promise<ReadHomeDto.Res> {
-    const articles = await this.articleService.getArticles()
-    return { articles: articles }
+    const articles = await this.homeService.getArticles()
+    return {articles: articles}
   }
 }

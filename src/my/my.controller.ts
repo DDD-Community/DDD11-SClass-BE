@@ -9,13 +9,12 @@ import {
   Query,
 } from '@nestjs/common'
 import { TypedBody, TypedRoute } from '@nestia/core'
-import { CreateMyDto } from './dto/create-my.dto'
-import { ReadUserDto } from '../user/dto/read-user.dto'
-import { UserService } from '../user/user.service'
+import { MyService } from './my.service'
+import { ReadMyDto } from './dto/read-my.dto'
 
 @Controller('my')
 export class MyController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly myService: MyService) {}
 
   /**
    * sample description
@@ -24,7 +23,7 @@ export class MyController {
    * @tag My 마이페이지
    */
   @Get()
-  async findOne(@Query('userId') userId: string): Promise<ReadUserDto.Res> {
-    return await this.userService.findOne(userId)
+  async findOne(@Query('userId') userId: string): Promise<ReadMyDto.Res> {
+    return await this.myService.findOne(userId)
   }
 }

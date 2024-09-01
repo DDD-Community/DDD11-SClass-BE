@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common'
 import { MyController } from './my.controller'
 import { MongooseModule } from '@nestjs/mongoose'
-import { DbModule } from 'src/db/db.module'
+import { DbModule } from '../db/db.module'
 import { MyService } from './my.service'
 
 @Module({

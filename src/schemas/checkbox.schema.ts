@@ -1,39 +1,39 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument, Types } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
+import mongoose, { HydratedDocument, Types } from 'mongoose'
 
-export type CheckboxDocument = HydratedDocument<Checkbox>;
+export type CheckboxDocument = HydratedDocument<Checkbox>
 
 @Schema()
 export class Checkbox {
   @Prop({ type: Types.ObjectId, default: () => new Types.ObjectId() })
-  _id: Types.ObjectId;
+  _id: Types.ObjectId
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Checklist' })
-  checklistId: string;
+  checklistId: string
 
   @Prop()
-  label: string;
+  label: string
 
   @Prop({ default: 0 })
-  isCompleted: number;
+  isCompleted: number
 
   @Prop({ default: 0 })
-  isMain: number;
+  isMain: number
 
   @Prop()
-  orderNo: number;
+  orderNo: number
 
   @Prop({ default: Date.now })
-  createdAt: Date;
+  createdAt: Date
 }
 
-export const CheckboxSchema = SchemaFactory.createForClass(Checkbox);
+export const CheckboxSchema = SchemaFactory.createForClass(Checkbox)
 
 CheckboxSchema.set('toJSON', {
   transform: (doc, ret) => {
-    ret.id = ret._id.toString();
-    delete ret._id;
-    delete ret.__v;
-    return ret;
+    ret.id = ret._id.toString()
+    delete ret._id
+    delete ret.__v
+    return ret
   },
-});
+})

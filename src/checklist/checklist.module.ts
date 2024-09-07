@@ -1,7 +1,7 @@
-import { Module } from '@nestjs/common';
-import { ChecklistController } from './checklist.controller';
-import { ChecklistService } from './checklist.service';
-import { DbModule } from '../db/db.module';
+import { Module } from '@nestjs/common'
+import { ChecklistController } from './checklist.controller'
+import { ChecklistService } from './checklist.service'
+import { DbModule } from '../db/db.module'
 
 @Module({
   imports: [DbModule],

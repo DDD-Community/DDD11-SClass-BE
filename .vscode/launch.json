@@ -10,6 +10,8 @@
       "name": "프로그램 시작",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/src/main.ts",
+      "env": {
+      },
       "preLaunchTask": "tsc: watch - tsconfig.json",
       "outFiles": ["${workspaceFolder}/dist/**/*.js"],
     }

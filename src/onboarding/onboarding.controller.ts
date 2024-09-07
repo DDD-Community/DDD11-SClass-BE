@@ -22,7 +22,8 @@ export class OnboardingController {
    * @tag Onboarding 온보딩 & 회원가입
    */
   @Post()
-  async create(@TypedBody() req: CreateOnboardingDto.Req) {
+  async create(@TypedBody() req: CreateOnboardingDto.Req): Promise<object> {
     await this.onboardingService.create(req)
+    return {}
   }
 }

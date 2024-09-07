@@ -1,14 +1,15 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { DbModule } from './db/db.module';
-import * as Joi from 'joi';
-import { MongooseModule } from '@nestjs/mongoose';
-import { HomeModule } from './home/home.module';
-import { OnboardingModule } from './onboarding/onboarding.module';
-import { MyModule } from './my/my.module';
-import { ChecklistModule } from './checklist/checklist.module';
+import { Module } from '@nestjs/common'
+import { AppController } from './app.controller'
+import { AppService } from './app.service'
+import { ConfigModule, ConfigService } from '@nestjs/config'
+import { DbModule } from './db/db.module'
+import * as Joi from 'joi'
+import { MongooseModule } from '@nestjs/mongoose'
+import { HomeModule } from './home/home.module'
+import { OnboardingModule } from './onboarding/onboarding.module'
+import { MyModule } from './my/my.module'
+import { ChecklistModule } from './checklist/checklist.module'
+import { ArticleModule } from './article/article.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { ChecklistModule } from './checklist/checklist.module';
     OnboardingModule,
     MyModule,
     ChecklistModule,
+    ArticleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

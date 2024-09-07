@@ -12,6 +12,9 @@ export class Checklist {
   @Prop()
   userId: string;
 
+  @Prop()
+  title: string;
+
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Checkbox' }] })
   checkboxes: Checkbox[];
 

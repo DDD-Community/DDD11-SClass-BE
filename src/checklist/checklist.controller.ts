@@ -41,8 +41,11 @@ export class ChecklistController {
   async updateTitle(
     @Param('checklistId') checklistId: string,
     @Body() req: UpdateTitleDto.Req,
-  ):Promise<object> {
-    const res = await this.checklistService.updateChecklistTitle(checklistId, req.title)
+  ): Promise<object> {
+    const res = await this.checklistService.updateChecklistTitle(
+      checklistId,
+      req.title,
+    )
     return {}
   }
 

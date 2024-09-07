@@ -15,6 +15,6 @@ export class HomeController {
   @Get('articles')
   async getHome(): Promise<ReadHomeDto.Res> {
     const articles = await this.homeService.getArticles()
-    return {articles: articles}
+    return { articles: articles }
   }
 }

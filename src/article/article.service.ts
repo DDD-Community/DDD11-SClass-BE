@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { CreateArticleDto } from './dto/create-article.dto';
 import axios from 'axios';
 import { object } from 'joi';
-import { html } from 'cheerio';
 import { InjectModel } from '@nestjs/mongoose';
 import { Article } from '../schemas/article.schema';
 import { Model } from 'mongoose';

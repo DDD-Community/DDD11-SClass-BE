@@ -9,6 +9,7 @@ import { HomeModule } from './home/home.module'
 import { OnboardingModule } from './onboarding/onboarding.module'
 import { MyModule } from './my/my.module'
 import { ChecklistModule } from './checklist/checklist.module'
+import { ArticleModule } from './article/article.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { ChecklistModule } from './checklist/checklist.module'
     OnboardingModule,
     MyModule,
     ChecklistModule,
+    ArticleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

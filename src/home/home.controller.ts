@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common'
+import { Controller, Get, Query } from '@nestjs/common'
 import { HomeService } from './home.service'
 import { ReadHomeDto } from './dto/read-home.dto'
 
@@ -13,8 +13,8 @@ export class HomeController {
    * @tag Home 홈
    */
   @Get('articles')
-  async getHome(): Promise<ReadHomeDto.Res> {
-    const articles = await this.homeService.getArticles()
+  async getHome(@Query('userId') userId: string): Promise<ReadHomeDto.Res> {
+    const articles = await this.homeService.getArticles(userId)
     return { articles: articles }
   }
 }

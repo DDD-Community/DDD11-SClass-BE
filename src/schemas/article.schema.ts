@@ -5,9 +5,6 @@ export type ArticleDocument = HydratedDocument<Article>
 
 @Schema()
 export class Article {
-  @Prop({ type: Types.ObjectId })
-  _id: string
-
   articleId: string
   @Prop()
   category: string
@@ -21,6 +18,8 @@ export class Article {
   thumbnail: string
   @Prop()
   url: string
+  @Prop()
+  job: string
 }
 
 export const ArticleSchema = SchemaFactory.createForClass(Article)

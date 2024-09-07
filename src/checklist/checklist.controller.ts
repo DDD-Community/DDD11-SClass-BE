@@ -66,8 +66,9 @@ export class ChecklistController {
   async deleteCheckbox(
     @Param('checklistId') checklistId: string,
     @Param('id') id: string
-  ): Promise<string> {
-    return await this.checklistService.deleteCheckbox(checklistId, id);
+  ): Promise<object> {
+    const message = await this.checklistService.deleteCheckbox(checklistId, id);
+    return {message: message}
   }
   
 }

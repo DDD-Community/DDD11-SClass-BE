@@ -16,7 +16,7 @@ export class HomeService {
       throw new NotFoundException(`userId=${userId} not found`)
     }
 
-    const cursor = await this.articleModel.find({job: user.job})
+    const cursor = await this.articleModel.find({ job: user.job })
     const res = cursor.map((c) => {
       const article = c.toJSON()
       return article

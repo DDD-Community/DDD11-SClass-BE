@@ -35,9 +35,9 @@ export class ChecklistController {
   @Post()
   async createChecklist(
     @Body() createChecklistDto: CreateChecklistDto,
-  ): Promise<Dto<object>> {
-    await this.checklistService.createChecklist(createChecklistDto)
-    return { data: {} }
+  ): Promise<Dto<Checklist>> {
+    const res = await this.checklistService.createChecklist(createChecklistDto)
+    return { data: res }
   }
 
   /**

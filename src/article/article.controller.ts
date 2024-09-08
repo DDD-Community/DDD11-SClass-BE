@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common'
 import { ArticleService } from './article.service'
 import { CreateArticleDto } from './dto/create-article.dto'
+import { Dto } from '../app.dto'
 
 @Controller('articles')
 export class ArticleController {
@@ -22,8 +23,8 @@ export class ArticleController {
    * @tag Article 아티클
    */
   @Post()
-  async create(): Promise<CreateArticleDto.Res> {
+  async create(): Promise<Dto<CreateArticleDto.Res>> {
     const res = await this.articleService.create()
-    return { inserted: res }
+    return { data: { inserted: res } }
   }
 }

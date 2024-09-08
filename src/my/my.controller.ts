@@ -11,6 +11,7 @@ import {
 import { TypedBody, TypedRoute } from '@nestia/core'
 import { MyService } from './my.service'
 import { ReadMyDto } from './dto/read-my.dto'
+import { Dto } from '../app.dto'
 
 @Controller('my')
 export class MyController {
@@ -23,7 +24,8 @@ export class MyController {
    * @tag My 마이페이지
    */
   @Get()
-  async findOne(@Query('userId') userId: string): Promise<ReadMyDto.Res> {
-    return await this.myService.findOne(userId)
+  async findOne(@Query('userId') userId: string): Promise<Dto<ReadMyDto.Res>> {
+    const res = await this.myService.findOne(userId)
+    return {data: res}
   }
 }

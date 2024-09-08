@@ -9,3 +9,6 @@ export interface Checkbox {
   orderNo: number // 정렬 순서
   createdAt: Date // 체크박스의 생성일
 }
+export interface Res {
+  checkboxes: Checkbox[]
+}

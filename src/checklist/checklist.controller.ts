@@ -16,6 +16,10 @@ import { UpdateOrderNoDto } from './dto/update-orderNo.dto'
 import { UpdateIsMainDto } from './dto/update-isMain.dto'
 import { ApiTags } from '@nestjs/swagger'
 import { UpdateTitleDto } from './dto/update-checklist.dto'
+import { Dto } from '../app.dto'
+import { Checkbox, Res as CheckboxRes } from './interfaces/checkbox.interface'
+import { Res as ChecklistRes } from './interfaces/checklist.interface'
+import { Checklist } from './interfaces/checklist.interface'
 
 @ApiTags('Checklist')
 @Controller('checklists')
@@ -23,13 +27,17 @@ export class ChecklistController {
   constructor(private readonly checklistService: ChecklistService) {}
 
   @Get()
-  async findByUser(@Query('userId') userId: string) {
-    return await this.checklistService.findByUser(userId)
+  async findByUser(@Query('userId') userId: string): Promise<Dto<ChecklistRes>> {
+    const res = await this.checklistService.findByUser(userId)
+    return { data: {checklists: res} }
   }
 
   @Post()
-  async createChecklist(@Body() createChecklistDto: CreateChecklistDto) {
-    return await this.checklistService.createChecklist(createChecklistDto)
+  async createChecklist(
+    @Body() createChecklistDto: CreateChecklistDto,
+  ): Promise<Dto<object>> {
+    await this.checklistService.createChecklist(createChecklistDto)
+    return { data: {} }
   }
 
   /**
@@ -41,12 +49,12 @@ export class ChecklistController {
   async updateTitle(
     @Param('checklistId') checklistId: string,
     @Body() req: UpdateTitleDto.Req,
-  ): Promise<object> {
+  ): Promise<Dto<object>> {
     const res = await this.checklistService.updateChecklistTitle(
       checklistId,
       req.title,
     )
-    return {}
+    return { data: {} }
   }
 
   /**
@@ -57,25 +65,27 @@ export class ChecklistController {
   @Delete(':checklistId')
   async deleteChecklist(
     @Param('checklistId') checklistId: string,
-  ): Promise<object> {
+  ): Promise<Dto<object>> {
     const message = await this.checklistService.deleteChecklist(checklistId)
-    return { message: message }
+    return { data: {} }
   }
 
   @Get(':checklistId/checkboxes')
-  async getCheckboxes(@Param('checklistId') checklistId: string) {
-    return await this.checklistService.getCheckboxesByChecklistId(checklistId)
+  async getCheckboxes(@Param('checklistId') checklistId: string): Promise<Dto<CheckboxRes>> {
+    const res = await this.checklistService.getCheckboxesByChecklistId(checklistId)
+    return {data: {checkboxes: res}}
   }
 
   @Post(':checklistId/checkboxes')
   async createCheckbox(
     @Param('checklistId') checklistId: string,
     @Body() createCheckboxDto: CreateCheckboxDto,
-  ) {
-    return await this.checklistService.createCheckbox({
+  ): Promise<Dto<object>> {
+await this.checklistService.createCheckbox({
       ...createCheckboxDto,
       checklistId,
     })
+    return {data: {}}
   }
 
   @Patch(':checklistId/checkboxes/:id/completed')
@@ -83,8 +93,9 @@ export class ChecklistController {
     @Param('checklistId') checklistId: string,
     @Param('id') id: string,
     @Body() update: UpdateCompletedDto,
-  ) {
-    return await this.checklistService.updateCompleted(checklistId, id, update)
+  ): Promise<Dto<object>> {
+    await this.checklistService.updateCompleted(checklistId, id, update)
+    return {data: {}}
   }
 
   @Patch(':checklistId/checkboxes/:id/order')
@@ -92,8 +103,9 @@ export class ChecklistController {
     @Param('checklistId') checklistId: string,
     @Param('id') id: string,
     @Body() update: UpdateOrderNoDto,
-  ) {
-    return await this.checklistService.updateOrderNo(checklistId, id, update)
+  ): Promise<Dto<object>> {
+    await this.checklistService.updateOrderNo(checklistId, id, update)
+    return {data: {}}
   }
 
   @Patch(':checklistId/checkboxes/:id/main')
@@ -101,16 +113,17 @@ export class ChecklistController {
     @Param('checklistId') checklistId: string,
     @Param('id') id: string,
     @Body() update: UpdateIsMainDto,
-  ) {
-    return await this.checklistService.updateIsMain(checklistId, id, update)
+  ): Promise<Dto<object>>  {
+    await this.checklistService.updateIsMain(checklistId, id, update)
+    return {data: {}}
   }
 
   @Delete(':checklistId/checkboxes/:id')
   async deleteCheckbox(
     @Param('checklistId') checklistId: string,
     @Param('id') id: string,
-  ): Promise<object> {
+  ): Promise<Dto<object>> {
     const message = await this.checklistService.deleteCheckbox(checklistId, id)
-    return { message: message }
+    return { data: {}} 
   }
 }

@@ -7,3 +7,6 @@ export interface Checklist {
   checkboxes: Types.ObjectId[] // 체크리스트에 포함된 체크박스들의 ID 배열
   createdAt: Date // 체크리스트의 생성일
 }
+export interface Res {
+  checklists: Checklist[]
+}

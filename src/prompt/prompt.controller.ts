@@ -24,8 +24,8 @@ export class PromptController {
    */
   @Post()
   async get(@Body() req: CreatePromptDto.Req): Promise<Dto<CreatePromptDto.Res>> {
-    const res = await this.promptService.get(req);
-    return {data: res}
+    const checklist = await this.promptService.get(req);
+    return {data: {checklist:checklist, checklistId:null}}
   }
     /**
    * sample description
@@ -35,38 +35,22 @@ export class PromptController {
    */
   @Post('/save')
   async create(@TypedBody() req: CreatePromptDto.Req): Promise<Dto<CreatePromptDto.Res>> {
-    const res = await this.promptService.create(req);
-    const checklist = new CreateChecklistDto()
-    checklist.userId = req.userId
-    checklist.orderNo = 1
-    const res2 = await this.checklistService.createChecklist(checklist)
-    for (const checkbox of res.checklist) {
+    const checklist = await this.promptService.create(req);
+    const req1 = new CreateChecklistDto()
+    req1.userId = req.userId
+    req1.orderNo = 1
+    const res2 = await this.checklistService.createChecklist(req1)
+    for (const checkbox of checklist) {
       const req2 = new CreateCheckboxDto()
       req2.checklistId = res2.id
       req2.label = checkbox
       req2.userId = req.userId
       const res3 = await this.checklistService.createCheckbox(req2)
     }
-    return {data: res}
+    return {data: {
+      checklistId: res2.id,
+      checklist: checklist,
+    }}
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.promptService.findAll();
-  // }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.promptService.findOne(+id);
-  // }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updatePromptDto: UpdatePromptDto) {
-  //   return this.promptService.update(+id, updatePromptDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.promptService.remove(+id);
-  // }
 }

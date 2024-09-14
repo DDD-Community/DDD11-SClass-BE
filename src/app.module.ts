@@ -10,6 +10,7 @@ import { OnboardingModule } from './onboarding/onboarding.module'
 import { MyModule } from './my/my.module'
 import { ChecklistModule } from './checklist/checklist.module'
 import { ArticleModule } from './article/article.module'
+import { PromptModule } from './prompt/prompt.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { ArticleModule } from './article/article.module'
     MyModule,
     ChecklistModule,
     ArticleModule,
+    PromptModule,
   ],
   controllers: [AppController],
   providers: [AppService],

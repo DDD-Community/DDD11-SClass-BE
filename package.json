@@ -24,6 +24,8 @@
     "docker:run": "docker run -d -p 3000:3000 --name onboarding-kit onboarding-kit"
   },
   "dependencies": {
+    "@langchain/core": "^0.3.0",
+    "@langchain/openai": "^0.3.0",
     "@nestia/core": "^3.2.1",
     "@nestia/e2e": "^0.4.3",
     "@nestia/fetcher": "^3.2.1",
@@ -41,8 +43,10 @@
     "html-to-text": "^9.0.5",
     "joi": "^17.13.1",
     "jsdom": "^25.0.0",
+    "langchain": "^0.2.19",
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.2",
+    "openai": "^4.61.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "source-map-support": "^0.5.21",

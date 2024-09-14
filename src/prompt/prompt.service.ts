@@ -8,7 +8,7 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class PromptService {
-  async get(req: CreatePromptDto.Req):Promise<CreatePromptDto.Res> {
+  async get(req: CreatePromptDto.Req):Promise<string[]> {
     const prompt = ChatPromptTemplate.fromTemplate(`
       You are a professional who extracts key keywords from the text. Please extract the keyword ~ from the following examples in English:
 
@@ -30,9 +30,9 @@ export class PromptService {
   console.log(`keword=${answer.content}`);
   const answer2 = await sendRequest(answer.content, req.question);
 
-    return {checklist: answer2}
+    return answer2
   }
-  async create(req: CreatePromptDto.Req):Promise<CreatePromptDto.Res> {
+  async create(req: CreatePromptDto.Req):Promise<string[]> {
     const prompt = ChatPromptTemplate.fromTemplate(`
       You are a professional who extracts key keywords from the text. Please extract the keyword ~ from the following examples in English:
 
@@ -54,7 +54,7 @@ export class PromptService {
   console.log(`keword=${answer.content}`);
   const answer2 = await sendRequest(answer.content, req.question);
 
-    return {checklist: answer2}
+    return answer2
   }
 
 }

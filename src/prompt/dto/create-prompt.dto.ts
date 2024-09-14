@@ -6,6 +6,7 @@ export namespace CreatePromptDto {
     }
     res: Response
     export interface Res {
+        checklistId: string|null
         checklist: string[]
     }
   }

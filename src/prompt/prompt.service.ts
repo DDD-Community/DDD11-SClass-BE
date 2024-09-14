@@ -8,6 +8,30 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class PromptService {
+  async get(req: CreatePromptDto.Req):Promise<CreatePromptDto.Res> {
+    const prompt = ChatPromptTemplate.fromTemplate(`
+      You are a professional who extracts key keywords from the text. Please extract the keyword ~ from the following examples in English:
+
+      Examples:
+      1. "~에 체크리스트를 만들어줘" → Extracted Keyword: ~
+      2. "~는 어떻게 하는게 좋을까" → Extracted Keyword: ~
+      3. "~알려줘" → Extracted Keyword: ~
+
+      Now, extract the keyword from the following question:
+
+      질문: "{question}"
+      
+      키워드: 
+      `
+  );
+  const llm = new ChatOpenAI({temperature:1});
+  const chain = prompt.pipe(llm);
+  const answer = await chain.invoke({ question: req.question});
+  console.log(`keword=${answer.content}`);
+  const answer2 = await sendRequest(answer.content, req.question);
+
+    return {checklist: answer2}
+  }
   async create(req: CreatePromptDto.Req):Promise<CreatePromptDto.Res> {
     const prompt = ChatPromptTemplate.fromTemplate(`
       You are a professional who extracts key keywords from the text. Please extract the keyword ~ from the following examples in English:

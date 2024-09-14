@@ -134,11 +134,11 @@ export class ChecklistController {
   async deleteCheckbox(
     @Param('checklistId') checklistId: string,
     @TypedBody() req: DeleteCheckboxDto.Req,
-  ): Promise<Dto<object>> {
-    const message = await this.checklistService.deleteCheckbox(
+  ): Promise<Dto<DeleteCheckboxDto.Res>> {
+    const res = await this.checklistService.deleteCheckbox(
       checklistId,
       req.checkboxIds,
     )
-    return { data: {} }
+    return { data: res }
   }
 }

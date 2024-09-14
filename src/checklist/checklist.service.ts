@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { Checklist } from './interfaces/checklist.interface'
@@ -9,6 +9,7 @@ import { UpdateCompletedDto } from './dto/update-completed.dto'
 import { UpdateOrderNoDto } from './dto/update-orderNo.dto'
 import { UpdateIsMainDto } from './dto/update-isMain.dto'
 import { Types } from 'mongoose'
+import { DeleteCheckboxDto } from './dto/delete-checkbox.dto'
 
 @Injectable()
 export class ChecklistService {
@@ -189,9 +190,16 @@ export class ChecklistService {
   async deleteCheckbox(
     checklistId: string,
     checkboxIds: string[],
-  ): Promise<string> {
+  ): Promise<DeleteCheckboxDto.Res> {
     const checklistObjectId = new Types.ObjectId(checklistId)
+    var deletedCount = 0
+    const deletedIds:string[] = []
+
     for (const checkboxId of checkboxIds) {
+      if (checkboxId.length != 24) {
+        throw new BadRequestException(`Checkbox with ID ${checkboxId} length is not 24`)
+
+      }
       const checkboxObjectId = new Types.ObjectId(checkboxId)
 
       const result = await this.checkboxModel.findOneAndDelete({
@@ -199,16 +207,23 @@ export class ChecklistService {
         checklistId: checklistObjectId,
       })
 
-      if (!result) {
-        throw new NotFoundException(`Checkbox with ID ${checkboxId} not found`)
+      if (result) {
+        deletedCount += 1
+        deletedIds.push(checkboxId)
+        
+        await this.checklistModel.updateOne(
+          { _id: checklistObjectId },
+          { $pull: { checkboxes: result._id } },
+        )
       }
 
-      await this.checklistModel.updateOne(
-        { _id: checklistObjectId },
-        { $pull: { checkboxes: result._id } },
-      )
+
     }
 
-    return '삭제되었습니다'
+    const res: DeleteCheckboxDto.Res = {
+      deletedCount,
+      deletedIds,
+    }
+    return res
   }
 }

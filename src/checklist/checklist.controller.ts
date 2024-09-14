@@ -28,6 +28,11 @@ import { DeleteCheckboxDto } from './dto/delete-checkbox.dto'
 export class ChecklistController {
   constructor(private readonly checklistService: ChecklistService) {}
 
+      /**
+   * sample description
+   * @summary 목록 조회 
+   * @returns sample return
+   */
   @Get()
   async findByUser(
     @Query('userId') userId: string,
@@ -74,13 +79,18 @@ export class ChecklistController {
     return { data: {} }
   }
 
+    /**
+   * sample description
+   * @summary 상세 조회 
+   * @returns sample return
+   */
   @Get(':checklistId/checkboxes')
   async getCheckboxes(
     @Param('checklistId') checklistId: string,
   ): Promise<Dto<CheckboxRes>> {
     const res =
       await this.checklistService.getCheckboxesByChecklistId(checklistId)
-    return { data: { checkboxes: res } }
+    return { data: res }
   }
 
   @Post(':checklistId/checkboxes')

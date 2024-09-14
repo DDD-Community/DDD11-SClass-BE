@@ -10,5 +10,7 @@ export interface Checkbox {
   createdAt: Date // 체크박스의 생성일
 }
 export interface Res {
-  checkboxes: Checkbox[]
+  title: string,
+  checklistId: Types.ObjectId, // 이 체크박스가 속한 체크리스트의 ID
+  checkboxes: Checkbox[],
 }

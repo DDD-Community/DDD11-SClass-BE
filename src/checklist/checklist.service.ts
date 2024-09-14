@@ -188,24 +188,26 @@ export class ChecklistService {
 
   async deleteCheckbox(
     checklistId: string,
-    checkboxId: string,
+    checkboxIds: string[],
   ): Promise<string> {
     const checklistObjectId = new Types.ObjectId(checklistId)
-    const checkboxObjectId = new Types.ObjectId(checkboxId)
+    for (const checkboxId of checkboxIds) {
+      const checkboxObjectId = new Types.ObjectId(checkboxId)
 
-    const result = await this.checkboxModel.findOneAndDelete({
-      _id: checkboxObjectId,
-      checklistId: checklistObjectId,
-    })
+      const result = await this.checkboxModel.findOneAndDelete({
+        _id: checkboxObjectId,
+        checklistId: checklistObjectId,
+      })
 
-    if (!result) {
-      throw new NotFoundException(`Checkbox with ID ${checkboxId} not found`)
+      if (!result) {
+        throw new NotFoundException(`Checkbox with ID ${checkboxId} not found`)
+      }
+
+      await this.checklistModel.updateOne(
+        { _id: checklistObjectId },
+        { $pull: { checkboxes: result._id } },
+      )
     }
-
-    await this.checklistModel.updateOne(
-      { _id: checklistObjectId },
-      { $pull: { checkboxes: result._id } },
-    )
 
     return '삭제되었습니다'
   }

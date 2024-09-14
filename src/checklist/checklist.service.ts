@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { Checklist } from './interfaces/checklist.interface'
-import { Checkbox } from './interfaces/checkbox.interface'
+import { Checkbox, Res } from './interfaces/checkbox.interface'
 import { CreateChecklistDto } from './dto/create-checklist.dto'
 import { CreateCheckboxDto } from './dto/create-checkbox.dto'
 import { UpdateCompletedDto } from './dto/update-completed.dto'
@@ -10,6 +10,7 @@ import { UpdateOrderNoDto } from './dto/update-orderNo.dto'
 import { UpdateIsMainDto } from './dto/update-isMain.dto'
 import { Types } from 'mongoose'
 import { DeleteCheckboxDto } from './dto/delete-checkbox.dto'
+import { ObjectId } from 'mongodb'
 
 @Injectable()
 export class ChecklistService {
@@ -68,7 +69,7 @@ export class ChecklistService {
     return '삭제되었습니다'
   }
 
-  async getCheckboxesByChecklistId(checklistId: string): Promise<Checkbox[]> {
+  async getCheckboxesByChecklistId(checklistId: string): Promise<Res> {
     const checklistObjectId = new Types.ObjectId(checklistId)
 
     const checklist = await this.checklistModel
@@ -80,7 +81,11 @@ export class ChecklistService {
     }
 
     if (!checklist.checkboxes || checklist.checkboxes.length === 0) {
-      return []
+      return   {
+        title: checklist.title,
+        checklistId: new ObjectId(checklistId), 
+        checkboxes: [],
+      } 
     }
 
     const checkboxes = await this.checkboxModel
@@ -89,7 +94,11 @@ export class ChecklistService {
       })
       .exec()
 
-    return checkboxes
+    return {
+      title: checklist.title,
+      checklistId: new ObjectId(checklistId), 
+      checkboxes: checkboxes as Checkbox[],
+    } as Res
   }
 
   async createCheckbox(

@@ -20,6 +20,8 @@ import { Dto } from '../app.dto'
 import { Checkbox, Res as CheckboxRes } from './interfaces/checkbox.interface'
 import { Res as ChecklistRes } from './interfaces/checklist.interface'
 import { Checklist } from './interfaces/checklist.interface'
+import { TypedBody } from '@nestia/core'
+import { DeleteCheckboxDto } from './dto/delete-checkbox.dto'
 
 @ApiTags('Checklist')
 @Controller('checklists')
@@ -27,9 +29,11 @@ export class ChecklistController {
   constructor(private readonly checklistService: ChecklistService) {}
 
   @Get()
-  async findByUser(@Query('userId') userId: string): Promise<Dto<ChecklistRes>> {
+  async findByUser(
+    @Query('userId') userId: string,
+  ): Promise<Dto<ChecklistRes>> {
     const res = await this.checklistService.findByUser(userId)
-    return { data: {checklists: res} }
+    return { data: { checklists: res } }
   }
 
   @Post()
@@ -71,9 +75,12 @@ export class ChecklistController {
   }
 
   @Get(':checklistId/checkboxes')
-  async getCheckboxes(@Param('checklistId') checklistId: string): Promise<Dto<CheckboxRes>> {
-    const res = await this.checklistService.getCheckboxesByChecklistId(checklistId)
-    return {data: {checkboxes: res}}
+  async getCheckboxes(
+    @Param('checklistId') checklistId: string,
+  ): Promise<Dto<CheckboxRes>> {
+    const res =
+      await this.checklistService.getCheckboxesByChecklistId(checklistId)
+    return { data: { checkboxes: res } }
   }
 
   @Post(':checklistId/checkboxes')
@@ -81,11 +88,11 @@ export class ChecklistController {
     @Param('checklistId') checklistId: string,
     @Body() createCheckboxDto: CreateCheckboxDto,
   ): Promise<Dto<object>> {
-await this.checklistService.createCheckbox({
+    await this.checklistService.createCheckbox({
       ...createCheckboxDto,
       checklistId,
     })
-    return {data: {}}
+    return { data: {} }
   }
 
   @Patch(':checklistId/checkboxes/:id/completed')
@@ -95,7 +102,7 @@ await this.checklistService.createCheckbox({
     @Body() update: UpdateCompletedDto,
   ): Promise<Dto<object>> {
     await this.checklistService.updateCompleted(checklistId, id, update)
-    return {data: {}}
+    return { data: {} }
   }
 
   @Patch(':checklistId/checkboxes/:id/order')
@@ -105,7 +112,7 @@ await this.checklistService.createCheckbox({
     @Body() update: UpdateOrderNoDto,
   ): Promise<Dto<object>> {
     await this.checklistService.updateOrderNo(checklistId, id, update)
-    return {data: {}}
+    return { data: {} }
   }
 
   @Patch(':checklistId/checkboxes/:id/main')
@@ -113,17 +120,25 @@ await this.checklistService.createCheckbox({
     @Param('checklistId') checklistId: string,
     @Param('id') id: string,
     @Body() update: UpdateIsMainDto,
-  ): Promise<Dto<object>>  {
+  ): Promise<Dto<object>> {
     await this.checklistService.updateIsMain(checklistId, id, update)
-    return {data: {}}
+    return { data: {} }
   }
 
-  @Delete(':checklistId/checkboxes/:id')
+  /**
+   * sample description
+   * @summary 체크리스트 항목 여러 개 삭제 
+   * @returns sample return
+   */
+  @Delete(':checklistId/checkboxes')
   async deleteCheckbox(
     @Param('checklistId') checklistId: string,
-    @Param('id') id: string,
+    @TypedBody() req: DeleteCheckboxDto.Req,
   ): Promise<Dto<object>> {
-    const message = await this.checklistService.deleteCheckbox(checklistId, id)
-    return { data: {}} 
+    const message = await this.checklistService.deleteCheckbox(
+      checklistId,
+      req.checkboxIds,
+    )
+    return { data: {} }
   }
 }
